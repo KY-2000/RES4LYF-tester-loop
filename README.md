@@ -53,7 +53,7 @@ A comprehensive collection of loop nodes for ComfyUI that provides advanced iter
 3. **Install this loop helper pack** in the same custom_nodes directory:
    ```bash
    cd ComfyUI/custom_nodes/
-   git clone [your-repository-url] RES4LYF-Loop-Helpers
+   git clone https://github.com/KY-2000/RES4LYF-tester-loop.git
    ```
 
 ### Fallback Behavior
