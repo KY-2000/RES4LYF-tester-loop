@@ -157,6 +157,7 @@ except Exception:
 
 def _derive_sampler_enum() -> List[str]:
     if _rk_mod and hasattr(_rk_mod, "RK_SAMPLER_NAMES_BETA_FOLDERS"):
+        print("[RES4LYF Tester Loop] Loading samplers from _rk_mod.RK_SAMPLER_NAMES_BETA_FOLDERS")
         names = list(getattr(_rk_mod, "RK_SAMPLER_NAMES_BETA_FOLDERS"))
         out = ["none"]
         seen = set(out)
@@ -167,6 +168,7 @@ def _derive_sampler_enum() -> List[str]:
                 out.append(s)
         return out
     if _rk_mod and hasattr(_rk_mod, "get_sampler_name_list"):
+        print("[RES4LYF Tester Loop] Loading samplers from _rk_mod.get_sampler_name_list()")
         try:
             raw = list(_rk_mod.get_sampler_name_list())
             if raw and raw[0] != "none":
@@ -174,6 +176,7 @@ def _derive_sampler_enum() -> List[str]:
             return raw
         except Exception:
             pass
+    print("[RES4LYF Tester Loop] Using FALLBACK_SAMPLERS")
     return FALLBACK_SAMPLERS
 
 def _derive_scheduler_enum() -> List[str]:
@@ -186,10 +189,12 @@ def _derive_scheduler_enum() -> List[str]:
         ):
             fn = getattr(_helper_mod, fname, None)
             if callable(fn):
+                print(f"[RES4LYF Tester Loop] Loading schedulers from _helper_mod.{fname}()")
                 try:
                     return list(fn())
                 except Exception:
                     pass
+    print("[RES4LYF Tester Loop] Using FALLBACK_SCHEDULERS")
     return FALLBACK_SCHEDULERS
 
 _SAMPLER_ENUM = _derive_sampler_enum()
